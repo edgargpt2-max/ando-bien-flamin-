@@ -1,156 +1,1715 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ando Bien Flamin 🔥</title>
-<style>
-:root{--r:#ff1d18;--o:#ff7a00;--y:#ffd21c;--bg:#070707;--card:#121212;--muted:#b8b8b8}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:white;font-family:Arial,Helvetica,sans-serif}
-nav{position:sticky;top:0;z-index:20;background:#080808eF;backdrop-filter:blur(12px);border-bottom:1px solid #2b2b2b;padding:13px 5%;display:flex;align-items:center;gap:22px}
-nav b{color:var(--y);margin-right:auto;font-size:20px}nav a{color:#eee;text-decoration:none;font-size:14px}nav a:hover{color:var(--r)}
-.hero{min-height:88vh;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:35px;padding:65px 7%;background:radial-gradient(circle at 75% 50%,#6d0d05 0,#220503 28%,#070707 58%)}
-.hero img{width:min(520px,100%);filter:drop-shadow(0 0 35px #ff240080)} .eyebrow{color:var(--y);font-weight:900;letter-spacing:2px}
-h1{font-size:clamp(54px,8vw,105px);line-height:.85;margin:15px 0;text-transform:uppercase;font-style:italic}h1 span{color:var(--r)}
-.hero p{font-size:19px;color:#ddd;max-width:650px;line-height:1.55}.btn{display:inline-block;background:linear-gradient(90deg,var(--r),var(--o));padding:14px 22px;border-radius:999px;color:#fff;text-decoration:none;font-weight:900;margin-top:12px}
-section{padding:72px 7%}.title{font-size:42px;margin:0 0 12px}.sub{color:var(--muted);max-width:850px;line-height:1.6;margin-bottom:28px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(145deg,#171717,#0c0c0c);border:1px solid #292929;border-radius:22px;padding:24px;box-shadow:0 18px 40px #0008}.card h3{color:var(--y);font-size:23px;margin-top:0}.big{font-size:42px;font-weight:900;color:var(--r)}
-.timeline{border-left:3px solid var(--r);padding-left:24px}.timeline div{margin:0 0 28px}.timeline b{color:var(--y)}
-.recipes img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px}.recipes .card{padding:12px}.recipes h3,.recipes p{padding:0 10px}
-.fact{font-size:18px;line-height:1.55}.nutrition{overflow:auto}.nutrition table{width:100%;border-collapse:collapse;min-width:650px}.nutrition th,.nutrition td{padding:14px;border-bottom:1px solid #333;text-align:left}.nutrition th{color:var(--y)}
-.challenge{background:linear-gradient(135deg,#240000,#090909 55%,#361500);text-align:center}.challenge .big{font-size:clamp(48px,8vw,92px)}
-footer{text-align:center;padding:45px 7%;border-top:1px solid #252525;color:#999}.tag{display:inline-block;padding:7px 11px;background:#26100b;border:1px solid #6d1a0c;border-radius:999px;margin:4px;color:#ffc46b}
-@media(max-width:800px){nav a{display:none}.hero{grid-template-columns:1fr;text-align:center}.hero p{margin:auto}.hero img{margin:auto}.grid{grid-template-columns:1fr}.title{font-size:34px}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-/* === MODO MAMALÓN === */
-#progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--y),var(--o),var(--r));z-index:99;box-shadow:0 0 18px var(--r)}
-.reveal{opacity:0;transform:translateY(28px);transition:.7s ease}.reveal.on{opacity:1;transform:none}
-.card{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}.card:hover{transform:translateY(-8px) scale(1.01);border-color:#ff3b20;box-shadow:0 18px 50px #ff210025}
-.firebtn{border:0;cursor:pointer;font:inherit}.mini{font-size:13px;color:#aaa}
-.interactive{background:radial-gradient(circle at 50% 0,#4b0b04,#080808 48%)}
-.meter{height:24px;background:#242424;border-radius:999px;overflow:hidden;border:1px solid #3a3a3a}.meter>div{height:100%;width:0;background:linear-gradient(90deg,var(--y),var(--o),var(--r));transition:width .6s ease}
-.quizQ{font-size:23px;font-weight:900;margin-bottom:18px}.choices{display:flex;flex-wrap:wrap;gap:10px}.choices button{background:#191919;color:#fff;border:1px solid #3b3b3b;border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:800}.choices button:hover{border-color:var(--r);background:#2a0d08}
-#toast{position:fixed;right:20px;bottom:20px;background:#111;border:1px solid #ff3b20;border-radius:16px;padding:14px 18px;opacity:0;transform:translateY(20px);transition:.3s;z-index:80;box-shadow:0 10px 40px #000}.showtoast{opacity:1!important;transform:none!important}
-.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{background:#111;border:1px solid #292929;border-radius:20px;padding:22px;text-align:center}.stat strong{font-size:36px;color:var(--y);display:block}
-.recipeFilter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.recipeFilter button{background:#171717;color:#ddd;border:1px solid #333;padding:10px 14px;border-radius:999px;cursor:pointer}.recipeFilter button.active{background:var(--r);color:white;border-color:var(--r)}
-.faq details{background:#111;border:1px solid #292929;border-radius:14px;padding:16px 18px;margin:10px 0}.faq summary{cursor:pointer;font-weight:900;color:var(--y)}
-.flame{position:fixed;pointer-events:none;font-size:28px;animation:fly 1s ease-out forwards;z-index:100}@keyframes fly{to{transform:translateY(-130px) rotate(30deg) scale(.3);opacity:0}}
-@media(max-width:800px){.statrow{grid-template-columns:1fr 1fr}}
+<title>Ando Bien Flamin 🔥</title>
+
+<style>
+:root{
+    --r:#ff1d18;
+    --o:#ff7a00;
+    --y:#ffd21c;
+    --bg:#070707;
+    --card:#121212;
+    --muted:#b8b8b8;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+/* =========================
+   MENÚ
+========================= */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:#080808ef;
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #2b2b2b;
+    padding:13px 5%;
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+nav b{
+    color:var(--y);
+    margin-right:auto;
+    font-size:20px;
+}
+
+nav a{
+    color:#eee;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:var(--r);
+}
+
+/* =========================
+   PORTADA
+========================= */
+
+.hero{
+    min-height:88vh;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    align-items:center;
+    gap:35px;
+    padding:65px 7%;
+    background:
+        radial-gradient(circle at 75% 50%,
+        #6d0d05 0,
+        #220503 28%,
+        #070707 58%);
+}
+
+.hero img{
+    width:min(520px,100%);
+    filter:drop-shadow(0 0 35px #ff240080);
+    animation:flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+.eyebrow{
+    color:var(--y);
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+h1{
+    font-size:clamp(54px,8vw,105px);
+    line-height:.85;
+    margin:15px 0;
+    text-transform:uppercase;
+    font-style:italic;
+}
+
+h1 span{
+    color:var(--r);
+    text-shadow:0 0 25px #ff1d1860;
+}
+
+.hero p{
+    font-size:19px;
+    color:#ddd;
+    max-width:650px;
+    line-height:1.55;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn{
+    display:inline-block;
+    background:linear-gradient(90deg,var(--r),var(--o));
+    padding:14px 22px;
+    border-radius:999px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:900;
+    margin-top:12px;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:scale(1.06);
+    box-shadow:0 0 30px #ff321870;
+}
+
+.firebtn{
+    border:0;
+    cursor:pointer;
+    font:inherit;
+}
+
+/* =========================
+   SECCIONES
+========================= */
+
+section{
+    padding:72px 7%;
+}
+
+.title{
+    font-size:42px;
+    margin:0 0 12px;
+}
+
+.sub{
+    color:var(--muted);
+    max-width:850px;
+    line-height:1.6;
+    margin-bottom:28px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
+.card{
+    background:linear-gradient(145deg,#171717,#0c0c0c);
+    border:1px solid #292929;
+    border-radius:22px;
+    padding:24px;
+    box-shadow:0 18px 40px #0008;
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.01);
+    border-color:#ff3b20;
+    box-shadow:0 18px 50px #ff210025;
+}
+
+.card h3{
+    color:var(--y);
+    font-size:23px;
+    margin-top:0;
+}
+
+.big{
+    font-size:42px;
+    font-weight:900;
+    color:var(--r);
+}
+
+/* =========================
+   HISTORIA
+========================= */
+
+.timeline{
+    border-left:3px solid var(--r);
+    padding-left:24px;
+}
+
+.timeline div{
+    margin:0 0 28px;
+}
+
+.timeline b{
+    color:var(--y);
+}
+
+/* =========================
+   RECETAS
+========================= */
+
+.recipes img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+.recipes .card{
+    padding:12px;
+}
+
+.recipes h3,
+.recipes p{
+    padding:0 10px;
+}
+
+/* =========================
+   DATOS
+========================= */
+
+.fact{
+    font-size:18px;
+    line-height:1.55;
+}
+
+/* =========================
+   NUTRICIÓN
+========================= */
+
+.nutrition{
+    overflow:auto;
+}
+
+.nutrition table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+.nutrition th,
+.nutrition td{
+    padding:14px;
+    border-bottom:1px solid #333;
+    text-align:left;
+}
+
+.nutrition th{
+    color:var(--y);
+}
+
+/* =========================
+   RETO FINAL
+========================= */
+
+.challenge{
+    background:
+        linear-gradient(
+        135deg,
+        #240000,
+        #090909 55%,
+        #361500);
+    text-align:center;
+}
+
+.challenge .big{
+    font-size:clamp(48px,8vw,92px);
+}
+
+/* =========================
+   ETIQUETAS
+========================= */
+
+.tag{
+    display:inline-block;
+    padding:7px 11px;
+    background:#26100b;
+    border:1px solid #6d1a0c;
+    border-radius:999px;
+    margin:4px;
+    color:#ffc46b;
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+
+#progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:4px;
+    width:0;
+    background:
+        linear-gradient(
+        90deg,
+        var(--y),
+        var(--o),
+        var(--r));
+    z-index:99;
+    box-shadow:0 0 18px var(--r);
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:.7s ease;
+}
+
+.reveal.on{
+    opacity:1;
+    transform:none;
+}
+
+/* =========================
+   LABORATORIO FLAMIN
+========================= */
+
+.interactive{
+    background:
+        radial-gradient(
+        circle at 50% 0,
+        #4b0b04,
+        #080808 48%);
+}
+
+.meter{
+    height:24px;
+    background:#242424;
+    border-radius:999px;
+    overflow:hidden;
+    border:1px solid #3a3a3a;
+}
+
+.meter > div{
+    height:100%;
+    width:0;
+    background:
+        linear-gradient(
+        90deg,
+        var(--y),
+        var(--o),
+        var(--r));
+    transition:width .6s ease;
+}
+
+.quizQ{
+    font-size:23px;
+    font-weight:900;
+    margin-bottom:18px;
+}
+
+.choices{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.choices button{
+    background:#191919;
+    color:#fff;
+    border:1px solid #3b3b3b;
+    border-radius:14px;
+    padding:12px 16px;
+    cursor:pointer;
+    font-weight:800;
+    transition:.2s;
+}
+
+.choices button:hover{
+    border-color:var(--r);
+    background:#2a0d08;
+    transform:translateY(-3px);
+}
+
+/* =========================
+   MENSAJES
+========================= */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#111;
+    border:1px solid #ff3b20;
+    border-radius:16px;
+    padding:14px 18px;
+    opacity:0;
+    transform:translateY(20px);
+    transition:.3s;
+    z-index:80;
+    box-shadow:0 10px 40px #000;
+}
+
+.showtoast{
+    opacity:1!important;
+    transform:none!important;
+}
+
+/* =========================
+   UNIVERSO FLAMIN
+========================= */
+
+.statrow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.stat{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:20px;
+    padding:22px;
+    text-align:center;
+}
+
+.stat strong{
+    font-size:36px;
+    color:var(--y);
+    display:block;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq details{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:14px;
+    padding:16px 18px;
+    margin:10px 0;
+}
+
+.faq summary{
+    cursor:pointer;
+    font-weight:900;
+    color:var(--y);
+}
+
+/* =========================
+   FUEGO
+========================= */
+
+.flame{
+    position:fixed;
+    pointer-events:none;
+    font-size:28px;
+    animation:fly 1s ease-out forwards;
+    z-index:100;
+}
+
+@keyframes fly{
+    to{
+        transform:
+            translateY(-130px)
+            rotate(30deg)
+            scale(.3);
+        opacity:0;
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:45px 7%;
+    border-top:1px solid #252525;
+    color:#999;
+}
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:800px){
+
+    nav a{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .hero img{
+        margin:auto;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .title{
+        font-size:34px;
+    }
+
+    .statrow{
+        grid-template-columns:1fr 1fr;
+    }
+}
 
 </style>
 </head>
-<body><div id="progress"></div><div id="toast">🔥 ¡Modo Flamin activado!</div>
-<nav><b>🔥 ANDO BIEN FLAMIN</b><a href="#historia">Historia</a><a href="#recetas">Recetas</a><a href="#datos">Datos</a><a href="#nutricion">Nutrición</a><a href="#interactivo">Interactúa</a><a href="#reto">Marketing</a></nav>
-<header class="hero"><div><div class="eyebrow">MISMO SNACK · OTRA ACTITUD</div><h1>ANDO BIEN <span>FLAMIN</span></h1><p>Una experiencia digital creada alrededor del crunch, el picante y la cultura de Cheetos Flamin’ Hot. Aquí el producto no solo se muestra: se convierte en recetas, contenido compartible y una identidad para redes.</p><a class="btn" href="#recetas">VER RECETAS 🔥</a></div><img src="assets/logo.png" alt="Logo Ando Bien Flamin"></header>
 
-<section id="historia"><h2 class="title">De snack a fenómeno 🔥</h2><p class="sub">Cheetos forma parte del portafolio de PepsiCo/Frito-Lay y la familia Flamin’ Hot se volvió una plataforma de sabor reconocible por su intensidad, color y actitud. La marca también ha llevado esa personalidad a moda, tecnología, colaboraciones y contenido social.</p>
-<div class="timeline"><div><b>La marca</b><br>Cheetos construyó una personalidad juguetona alrededor de Chester Cheetah y de un snack fácil de reconocer.</div><div><b>Flamin’ Hot</b><br>La variante picante convirtió el color rojo, el fuego y el “crunch” en códigos visuales muy fuertes para marketing.</div><div><b>Más allá de la bolsa</b><br>La marca ha realizado colaboraciones de moda y experiencias digitales pensadas para que los fans compartan contenido.</div></div></section>
+<body>
 
-<section id="recetas" class="recipes"><h2 class="title">Recetas Bien Flamin 🌽🍜</h2><p class="sub">La idea de la campaña: llevar el producto a combinaciones visuales, sencillas y antojables que funcionen especialmente bien en Reels, historias y carruseles.</p>
+<div id="progress"></div>
+
+<div id="toast">
+🔥 ¡Modo Flamin activado!
+</div>
+
+
+<!-- =========================
+     MENÚ
+========================= -->
+
+<nav>
+
+<b>🔥 ANDO BIEN FLAMIN</b>
+
+<a href="#historia">Historia</a>
+<a href="#recetas">Recetas</a>
+<a href="#datos">Datos</a>
+<a href="#nutricion">Nutrición</a>
+<a href="#interactivo">Interactúa</a>
+<a href="#reto">Marketing</a>
+
+</nav>
+
+
+<!-- =========================
+     PORTADA
+========================= -->
+
+<header class="hero">
+
+<div>
+
+<div class="eyebrow">
+MISMO SNACK · OTRA ACTITUD
+</div>
+
+<h1>
+ANDO BIEN
+<span>FLAMIN</span>
+</h1>
+
+<p>
+Una experiencia digital creada alrededor del crunch,
+el picante y la cultura de Cheetos Flamin’ Hot.
+Aquí el producto no solo se muestra: se convierte
+en recetas, contenido compartible y una identidad
+para redes.
+</p>
+
+<a class="btn" href="#recetas">
+VER RECETAS 🔥
+</a>
+
+</div>
+
+<img
+src="logo.png"
+alt="Logo Ando Bien Flamin">
+
+</header>
+
+
+<!-- =========================
+     HISTORIA
+========================= -->
+
+<section id="historia">
+
+<h2 class="title">
+De snack a fenómeno 🔥
+</h2>
+
+<p class="sub">
+Cheetos forma parte del portafolio de PepsiCo/Frito-Lay
+y la familia Flamin’ Hot se volvió una plataforma de sabor
+reconocible por su intensidad, color y actitud.
+La marca también ha llevado esa personalidad a moda,
+tecnología, colaboraciones y contenido social.
+</p>
+
+<div class="timeline">
+
+<div>
+<b>La marca</b><br>
+Cheetos construyó una personalidad juguetona alrededor
+de Chester Cheetah y de un snack fácil de reconocer.
+</div>
+
+<div>
+<b>Flamin’ Hot</b><br>
+La variante picante convirtió el color rojo, el fuego
+y el “crunch” en códigos visuales muy fuertes para marketing.
+</div>
+
+<div>
+<b>Más allá de la bolsa</b><br>
+La marca ha realizado colaboraciones de moda y experiencias
+digitales pensadas para que los fans compartan contenido.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     RECETAS
+========================= -->
+
+<section id="recetas" class="recipes">
+
+<h2 class="title">
+Recetas Bien Flamin 🌽🍜
+</h2>
+
+<p class="sub">
+La idea de la campaña es llevar el producto a combinaciones
+visuales, sencillas y antojables que funcionen especialmente
+bien en Reels, historias y carruseles.
+</p>
+
 <div class="grid">
-<article class="card"><img src="assets/dorichasca.png"><h3>Dorichasca Flamin</h3><p>Bolsa abierta + elote + crema + queso + limón + condimentos. El producto se vuelve el recipiente y parte de la receta.</p></article>
-<article class="card"><img src="assets/maruchan.png"><h3>Maruchan Bien Flamin</h3><p>Fideos preparados con toppings y Cheetos triturados para añadir textura y el golpe visual rojo de la campaña.</p></article>
-<article class="card"><img src="assets/papas.png"><h3>Papas Locas Flamin</h3><p>Papas, elote, crema, queso, salsa, limón y Cheetos Flamin’ Hot triturados. Una publicación perfecta para contenido de antojo.</p></article>
-</div></section>
 
-<section id="datos"><h2 class="title">Datos que prenden el feed</h2><div class="grid">
-<div class="card"><div class="big">CHEETLE®</div><p class="fact">La propia marca usa “Cheetle” como nombre para el polvito que queda en los dedos al comer Cheetos. Es un detalle perfecto para memes y contenido de comunidad.</p></div>
-<div class="card"><div class="big">160</div><p class="fact">Una etiqueta estadounidense de Cheetos Flamin’ Hot Crunchy declara 160 calorías por porción de 28 g. La información puede variar por país y presentación.</p></div>
-<div class="card"><div class="big">🔥 + 📱</div><p class="fact">Cheetos ha usado campañas digitales y colaboraciones diseñadas para generar conversación y contenido compartible; esa lógica inspira “Ando Bien Flamin”.</p></div>
-</div></section>
 
-<section id="nutricion" class="nutrition"><h2 class="title">¿Qué trae una porción?</h2><p class="sub">Referencia de una etiqueta oficial estadounidense de Cheetos Flamin’ Hot Crunchy, porción de 28 g. Para una entrega escolar conviene aclarar que la etiqueta mexicana y otras presentaciones pueden tener valores distintos.</p>
-<div class="card"><table><tr><th>Dato</th><th>Por 28 g</th></tr><tr><td>Calorías</td><td>160 kcal</td></tr><tr><td>Grasa total</td><td>11 g</td></tr><tr><td>Grasa saturada</td><td>1.5 g</td></tr><tr><td>Sodio</td><td>210 mg</td></tr><tr><td>Carbohidratos</td><td>15 g</td></tr><tr><td>Proteína</td><td>1 g</td></tr></table></div>
-<p class="sub" style="margin-top:18px">Entre sus ingredientes declarados aparecen harina de maíz enriquecida, aceite vegetal, sal y una mezcla de condimentos; la versión consultada contiene ingredientes de leche.</p></section>
+<!-- DORICHASCA -->
 
-<section><h2 class="title">Ideas para convertir visitas en interacción</h2><div class="grid">
-<div class="card"><h3>🔥 ¿Qué tan Flamin andas?</h3><p>Encuesta semanal en historias: “tranqui”, “ando picando” o “nivel incendio”. Sirve para mantener la identidad de la página.</p></div>
-<div class="card"><h3>🌽 Receta de la semana</h3><p>Un Reel corto con una combinación nueva y un carrusel con ingredientes. Cierra con una pregunta para incentivar comentarios.</p></div>
-<div class="card"><h3>📸 #AndoBienFlamin</h3><p>Invita a compartir combinaciones creativas y repostea las mejores. El objetivo es que el nombre de la página se convierta en una frase reutilizable.</p></div>
-</div></section>
+<article class="card">
 
+<img
+src="dorichasca.png"
+alt="Dorichasca Flamin">
+
+<h3>
+Dorichasca Flamin
+</h3>
+
+<p>
+Bolsa abierta + elote + crema + queso + limón +
+condimentos. El producto se vuelve el recipiente
+y parte de la receta.
+</p>
+
+</article>
+
+
+<!-- MARUCHAN -->
+
+<article class="card">
+
+<img
+src="maruchan.png"
+alt="Maruchan Bien Flamin">
+
+<h3>
+Maruchan Bien Flamin
+</h3>
+
+<p>
+Fideos preparados con toppings y Cheetos triturados
+para añadir textura y el golpe visual rojo de la campaña.
+</p>
+
+</article>
+
+
+<!-- PAPAS -->
+
+<article class="card">
+
+<img
+src="papas.png"
+alt="Papas Locas Flamin">
+
+<h3>
+Papas Locas Flamin
+</h3>
+
+<p>
+Papas, elote, crema, queso, salsa, limón y
+Cheetos Flamin’ Hot triturados.
+Una publicación perfecta para contenido de antojo.
+</p>
+
+</article>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     DATOS CURIOSOS
+========================= -->
+
+<section id="datos">
+
+<h2 class="title">
+Datos que prenden el feed 🔥
+</h2>
+
+<div class="grid">
+
+
+<div class="card">
+
+<div class="big">
+CHEETLE®
+</div>
+
+<p class="fact">
+La propia marca usa “Cheetle” como nombre para
+el polvito que queda en los dedos al comer Cheetos.
+Es un detalle perfecto para memes y contenido de comunidad.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="big">
+160
+</div>
+
+<p class="fact">
+Una etiqueta estadounidense de Cheetos Flamin’ Hot
+Crunchy declara 160 calorías por porción de 28 g.
+La información puede variar por país y presentación.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="big">
+🔥 + 📱
+</div>
+
+<p class="fact">
+Cheetos ha usado campañas digitales y colaboraciones
+diseñadas para generar conversación y contenido compartible;
+esa lógica inspira “Ando Bien Flamin”.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     NUTRICIÓN
+========================= -->
+
+<section id="nutricion" class="nutrition">
+
+<h2 class="title">
+¿Qué trae una porción?
+</h2>
+
+<p class="sub">
+Referencia de una etiqueta oficial estadounidense de
+Cheetos Flamin’ Hot Crunchy, porción de 28 g.
+Los valores pueden cambiar dependiendo del país
+y de la presentación.
+</p>
+
+<div class="card">
+
+<table>
+
+<tr>
+<th>Dato</th>
+<th>Por 28 g</th>
+</tr>
+
+<tr>
+<td>Calorías</td>
+<td>160 kcal</td>
+</tr>
+
+<tr>
+<td>Grasa total</td>
+<td>11 g</td>
+</tr>
+
+<tr>
+<td>Grasa saturada</td>
+<td>1.5 g</td>
+</tr>
+
+<tr>
+<td>Sodio</td>
+<td>210 mg</td>
+</tr>
+
+<tr>
+<td>Carbohidratos</td>
+<td>15 g</td>
+</tr>
+
+<tr>
+<td>Proteína</td>
+<td>1 g</td>
+</tr>
+
+</table>
+
+</div>
+
+<p class="sub" style="margin-top:18px">
+
+Entre sus ingredientes declarados aparecen harina de maíz
+enriquecida, aceite vegetal, sal y una mezcla de condimentos;
+la versión consultada contiene ingredientes de leche.
+
+</p>
+
+</section>
+
+
+<!-- =========================
+     IDEAS PARA REDES
+========================= -->
+
+<section>
+
+<h2 class="title">
+Ideas para convertir visitas en interacción
+</h2>
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+🔥 ¿Qué tan Flamin andas?
+</h3>
+
+<p>
+Encuesta semanal en historias:
+“tranqui”, “ando picando” o “nivel incendio”.
+Sirve para mantener la identidad de la página.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🌽 Receta de la semana
+</h3>
+
+<p>
+Un Reel corto con una combinación nueva
+y un carrusel con ingredientes.
+Cierra con una pregunta para incentivar comentarios.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📸 #AndoBienFlamin
+</h3>
+
+<p>
+Invita a compartir combinaciones creativas
+y repostea las mejores.
+El objetivo es que el nombre de la página
+se convierta en una frase reutilizable.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     UNIVERSO
+========================= -->
 
 <section class="reveal">
-<h2 class="title">El universo Flamin’ Hot</h2>
-<p class="sub">La fuerza de una campaña no está solo en enseñar el producto: está en crear códigos visuales, frases, recetas y experiencias que la gente quiera recordar y compartir.</p>
+
+<h2 class="title">
+El universo Flamin’ Hot
+</h2>
+
+<p class="sub">
+La fuerza de una campaña no está solo en enseñar
+el producto: está en crear códigos visuales,
+frases, recetas y experiencias que la gente
+quiera recordar y compartir.
+</p>
+
 <div class="statrow">
-<div class="stat"><strong>🔥</strong>Identidad visual intensa</div>
-<div class="stat"><strong>📱</strong>Contenido social</div>
-<div class="stat"><strong>🌽</strong>Recetas remix</div>
-<div class="stat"><strong>💬</strong>Comunidad</div>
+
+<div class="stat">
+<strong>🔥</strong>
+Identidad visual intensa
 </div>
+
+<div class="stat">
+<strong>📱</strong>
+Contenido social
+</div>
+
+<div class="stat">
+<strong>🌽</strong>
+Recetas remix
+</div>
+
+<div class="stat">
+<strong>💬</strong>
+Comunidad
+</div>
+
+</div>
+
 </section>
 
-<section id="interactivo" class="interactive reveal">
-<h2 class="title">🔥 Laboratorio Flamin</h2>
-<p class="sub">Aquí la página deja de ser solo información. Pícale a los botones, arma tu combinación y descubre qué tan Flamin andas.</p>
+
+<!-- =========================
+     LABORATORIO
+========================= -->
+
+<section
+id="interactivo"
+class="interactive reveal">
+
+<h2 class="title">
+🔥 Laboratorio Flamin
+</h2>
+
+<p class="sub">
+Aquí la página deja de ser solo información.
+Pícale a los botones, arma tu combinación
+y descubre qué tan Flamin andas.
+</p>
+
 <div class="grid">
+
+
+<!-- MEDIDOR -->
+
 <div class="card">
-<h3>🌶️ Medidor de picante</h3>
-<p>Elige tu nivel:</p>
-<input id="spice" type="range" min="1" max="5" value="3" style="width:100%" oninput="spiceLevel(this.value)">
-<div class="meter"><div id="spicebar"></div></div>
-<p id="spicetxt" class="fact">🔥🔥🔥 Ando Bien Flamin</p>
-</div>
-<div class="card">
-<h3>🎲 Generador de antojo</h3>
-<p id="combo" class="fact">Presiona el botón y deja que el fuego decida.</p>
-<button class="btn firebtn" onclick="randomCombo(event)">CREAR COMBINACIÓN</button>
-</div>
-<div class="card">
-<h3>📸 Frase para tu historia</h3>
-<p id="phrase" class="fact">“Nomás iba a comer uno…”</p>
-<button class="btn firebtn" onclick="newPhrase(event)">OTRA FRASE</button>
-</div>
+
+<h3>
+🌶️ Medidor de picante
+</h3>
+
+<p>
+Elige tu nivel:
+</p>
+
+<input
+id="spice"
+type="range"
+min="1"
+max="5"
+value="3"
+style="width:100%"
+oninput="spiceLevel(this.value)">
+
+<div class="meter">
+
+<div id="spicebar"></div>
+
 </div>
 
-<div class="card" style="margin-top:18px">
-<div class="quizQ">¿Qué tipo de Flamin eres?</div>
+<p
+id="spicetxt"
+class="fact">
+
+🔥🔥🔥 Ando Bien Flamin
+
+</p>
+
+</div>
+
+
+<!-- GENERADOR -->
+
+<div class="card">
+
+<h3>
+🎲 Generador de antojo
+</h3>
+
+<p
+id="combo"
+class="fact">
+
+Presiona el botón
+y deja que el fuego decida.
+
+</p>
+
+<button
+class="btn firebtn"
+onclick="randomCombo(event)">
+
+CREAR COMBINACIÓN
+
+</button>
+
+</div>
+
+
+<!-- FRASES -->
+
+<div class="card">
+
+<h3>
+📸 Frase para tu historia
+</h3>
+
+<p
+id="phrase"
+class="fact">
+
+“Nomás iba a comer uno…”
+
+</p>
+
+<button
+class="btn firebtn"
+onclick="newPhrase(event)">
+
+OTRA FRASE
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- TEST -->
+
+<div
+class="card"
+style="margin-top:18px">
+
+<div class="quizQ">
+¿Qué tipo de Flamin eres?
+</div>
+
 <div class="choices">
-<button onclick="quiz('Tranqui 🔥')">Empiezo leve</button>
-<button onclick="quiz('Flamin serio 🔥🔥🔥')">Entre más pique, mejor</button>
-<button onclick="quiz('Chef del antojo 🌽🔥')">Lo convierto en receta</button>
-<button onclick="quiz('Creador del caos 📱🔥')">Lo convierto en meme</button>
+
+<button
+onclick="quiz('Tranqui 🔥')">
+
+Empiezo leve
+
+</button>
+
+<button
+onclick="quiz('Flamin serio 🔥🔥🔥')">
+
+Entre más pique, mejor
+
+</button>
+
+<button
+onclick="quiz('Chef del antojo 🌽🔥')">
+
+Lo convierto en receta
+
+</button>
+
+<button
+onclick="quiz('Creador del caos 📱🔥')">
+
+Lo convierto en meme
+
+</button>
+
 </div>
-<p id="quizresult" class="fact"></p>
+
+<p
+id="quizresult"
+class="fact">
+</p>
+
 </div>
+
 </section>
+
+
+<!-- =========================
+     MARKETING
+========================= -->
 
 <section class="reveal">
-<h2 class="title">Marketing que no se siente como anuncio</h2>
+
+<h2 class="title">
+Marketing que no se siente como anuncio
+</h2>
+
 <div class="grid">
-<div class="card"><h3>1. Reconocimiento</h3><p>Negro, rojo, naranja, fuego y tipografía agresiva crean un sistema visual consistente. La meta es que una publicación se reconozca antes de leer el nombre.</p></div>
-<div class="card"><h3>2. Participación</h3><p>Preguntas, encuestas, recetas votadas por seguidores y contenido reutilizable convierten una audiencia pasiva en comunidad.</p></div>
-<div class="card"><h3>3. Contenido guardable</h3><p>Recetas, datos y carruseles aportan valor; memes y Reels dan alcance. La mezcla evita que el feed parezca un catálogo.</p></div>
+
+
+<div class="card">
+
+<h3>
+1. Reconocimiento
+</h3>
+
+<p>
+Negro, rojo, naranja, fuego y tipografía agresiva
+crean un sistema visual consistente.
+La meta es que una publicación se reconozca
+antes de leer el nombre.
+</p>
+
 </div>
+
+
+<div class="card">
+
+<h3>
+2. Participación
+</h3>
+
+<p>
+Preguntas, encuestas, recetas votadas por seguidores
+y contenido reutilizable convierten una audiencia
+pasiva en comunidad.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+3. Contenido guardable
+</h3>
+
+<p>
+Recetas, datos y carruseles aportan valor;
+memes y Reels dan alcance.
+La mezcla evita que el feed parezca un catálogo.
+</p>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- =========================
+     PREGUNTAS
+========================= -->
 
 <section class="faq reveal">
-<h2 class="title">Zona de datos 🔎</h2>
-<p class="sub">Información breve que sirve para enriquecer la campaña sin saturar el diseño.</p>
-<details><summary>¿Qué es “Cheetle”?</summary><p>Es el nombre que Cheetos usa para referirse al residuo de queso o sazonador que queda en los dedos al comer el snack.</p></details>
-<details><summary>¿Existen recetas oficiales con Flamin’ Hot?</summary><p>Sí. El sitio oficial de Cheetos publica recetas, incluyendo tamales Flamin’ Hot y otras preparaciones que usan productos de la marca.</p></details>
-<details><summary>¿Cheetos ha hecho campañas fuera de los snacks?</summary><p>Sí. La marca ha participado en colaboraciones de moda y experiencias tecnológicas, una muestra de cómo puede extender su identidad más allá del empaque.</p></details>
-<details><summary>¿Los datos nutrimentales siempre son iguales?</summary><p>No necesariamente. Pueden variar según el país, producto y presentación; por eso esta página identifica su tabla como una referencia de una etiqueta estadounidense de 28 g.</p></details>
+
+<h2 class="title">
+Zona de datos 🔎
+</h2>
+
+<p class="sub">
+Información breve para enriquecer
+la campaña sin saturar el diseño.
+</p>
+
+
+<details>
+
+<summary>
+¿Qué es “Cheetle”?
+</summary>
+
+<p>
+Es el nombre que Cheetos usa para referirse
+al residuo de queso o sazonador que queda
+en los dedos al comer el snack.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+¿Existen recetas oficiales con Flamin’ Hot?
+</summary>
+
+<p>
+Sí. El sitio oficial de Cheetos publica
+diferentes preparaciones que utilizan
+productos de la marca.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+¿Cheetos ha hecho campañas fuera de los snacks?
+</summary>
+
+<p>
+Sí. La marca ha participado en colaboraciones
+de moda y experiencias tecnológicas,
+mostrando cómo su identidad puede extenderse
+más allá del empaque.
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+¿Los datos nutrimentales siempre son iguales?
+</summary>
+
+<p>
+No necesariamente.
+Pueden variar según el país,
+el producto y la presentación.
+</p>
+
+</details>
+
 </section>
 
-<section id="reto" class="challenge reveal"><span class="tag">CONTENIDO</span><span class="tag">RECETAS</span><span class="tag">MEMES</span><span class="tag">REELS</span><div class="big">¿TÚ CUÁNTO AGUANTAS? 🔥</div><p class="sub" style="margin:12px auto">Ando Bien Flamin convierte un producto conocido en una comunidad visual: información + entretenimiento + recetas + participación.</p><button class="btn firebtn" onclick="fireStorm(event)">PRENDER EL MODO FLAMIN 🔥</button></section>
-<footer>Proyecto conceptual de marketing estudiantil · “Ando Bien Flamin” · Cheetos y sus marcas pertenecen a sus respectivos titulares.</footer>
+
+<!-- =========================
+     FINAL
+========================= -->
+
+<section
+id="reto"
+class="challenge reveal">
+
+<span class="tag">
+CONTENIDO
+</span>
+
+<span class="tag">
+RECETAS
+</span>
+
+<span class="tag">
+MEMES
+</span>
+
+<span class="tag">
+REELS
+</span>
+
+<div class="big">
+
+¿TÚ CUÁNTO AGUANTAS? 🔥
+
+</div>
+
+<p
+class="sub"
+style="margin:12px auto">
+
+Ando Bien Flamin convierte un producto conocido
+en una comunidad visual:
+información + entretenimiento +
+recetas + participación.
+
+</p>
+
+<button
+class="btn firebtn"
+onclick="fireStorm(event)">
+
+PRENDER EL MODO FLAMIN 🔥
+
+</button>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+Proyecto conceptual de marketing estudiantil ·
+“Ando Bien Flamin” ·
+Cheetos y sus marcas pertenecen
+a sus respectivos titulares.
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script>
-const phrases=["Nomás iba a comer uno…","El antojo no pregunta, llega 🔥","Hoy se come tranqui… según yo.","Crunch + picante = plan resuelto.","No es hambre, es modo Flamin.","Mi dieta empieza después de esta bolsa."];
-const bases=["Maruchan","elote en vaso","papas locas","nachos","esquites","mac & cheese"];
-const tops=["queso","limón","crema","salsa","elote","queso fundido"];
-const finishes=["Cheetos triturados 🔥","extra limón 🍋","doble crunch 💥","salsa picante 🌶️","queso extra 🧀"];
-function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("showtoast");setTimeout(()=>x.classList.remove("showtoast"),1600)}
-function spiceLevel(v){let names=["Tranqui 🔥","Ya empezó 🔥🔥","Ando Bien Flamin 🔥🔥🔥","Nivel incendio 🔥🔥🔥🔥","JEFE DEL FUEGO 🔥🔥🔥🔥🔥"];document.getElementById("spicebar").style.width=(v*20)+"%";document.getElementById("spicetxt").textContent=names[v-1]}
-function randomCombo(e){let r=a=>a[Math.floor(Math.random()*a.length)];document.getElementById("combo").textContent=`${r(bases)} + ${r(tops)} + ${r(finishes)}`;popFlame(e);toast("🌶️ Combinación creada")}
-function newPhrase(e){document.getElementById("phrase").textContent="“"+phrases[Math.floor(Math.random()*phrases.length)]+"”";popFlame(e)}
-function quiz(x){document.getElementById("quizresult").textContent="Resultado: "+x+" — ya eres parte del modo Ando Bien Flamin.";toast("🔥 Resultado desbloqueado")}
-function popFlame(e){let f=document.createElement("div");f.className="flame";f.textContent="🔥";f.style.left=(e.clientX||innerWidth/2)+"px";f.style.top=(e.clientY||innerHeight/2)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
-function fireStorm(e){for(let i=0;i<18;i++)setTimeout(()=>{let f=document.createElement("div");f.className="flame";f.textContent=["🔥","🌶️","💥"][Math.floor(Math.random()*3)];f.style.left=Math.random()*innerWidth+"px";f.style.top=(innerHeight-40)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1000)},i*55);toast("🔥 ¡ANDO BIEN FLAMIN!")}
+
+const phrases = [
+
+"Nomás iba a comer uno…",
+
+"El antojo no pregunta, llega 🔥",
+
+"Hoy se come tranqui… según yo.",
+
+"Crunch + picante = plan resuelto.",
+
+"No es hambre, es modo Flamin.",
+
+"Mi dieta empieza después de esta bolsa."
+
+];
+
+
+const bases = [
+
+"Maruchan",
+
+"elote en vaso",
+
+"papas locas",
+
+"nachos",
+
+"esquites",
+
+"mac & cheese"
+
+];
+
+
+const tops = [
+
+"queso",
+
+"limón",
+
+"crema",
+
+"salsa",
+
+"elote",
+
+"queso fundido"
+
+];
+
+
+const finishes = [
+
+"Cheetos triturados 🔥",
+
+"extra limón 🍋",
+
+"doble crunch 💥",
+
+"salsa picante 🌶️",
+
+"queso extra 🧀"
+
+];
+
+
+/* MENSAJE */
+
+function toast(t){
+
+    let x =
+    document.getElementById("toast");
+
+    x.textContent = t;
+
+    x.classList.add("showtoast");
+
+    setTimeout(
+        () =>
+        x.classList.remove("showtoast"),
+        1600
+    );
+
+}
+
+
+/* MEDIDOR */
+
+function spiceLevel(v){
+
+    let names = [
+
+        "Tranqui 🔥",
+
+        "Ya empezó 🔥🔥",
+
+        "Ando Bien Flamin 🔥🔥🔥",
+
+        "Nivel incendio 🔥🔥🔥🔥",
+
+        "JEFE DEL FUEGO 🔥🔥🔥🔥🔥"
+
+    ];
+
+    document
+    .getElementById("spicebar")
+    .style.width =
+    (v * 20) + "%";
+
+    document
+    .getElementById("spicetxt")
+    .textContent =
+    names[v - 1];
+
+}
+
+
+/* COMBINACIÓN */
+
+function randomCombo(e){
+
+    let r =
+    a =>
+    a[Math.floor(
+        Math.random() * a.length
+    )];
+
+    document
+    .getElementById("combo")
+    .textContent =
+
+    `${r(bases)} + ${r(tops)} + ${r(finishes)}`;
+
+    popFlame(e);
+
+    toast(
+        "🌶️ Combinación creada"
+    );
+
+}
+
+
+/* FRASES */
+
+function newPhrase(e){
+
+    document
+    .getElementById("phrase")
+    .textContent =
+
+    "“" +
+    phrases[
+        Math.floor(
+            Math.random() *
+            phrases.length
+        )
+    ] +
+    "”";
+
+    popFlame(e);
+
+}
+
+
+/* TEST */
+
+function quiz(x){
+
+    document
+    .getElementById("quizresult")
+    .textContent =
+
+    "Resultado: " +
+    x +
+    " — ya eres parte del modo Ando Bien Flamin.";
+
+    toast(
+        "🔥 Resultado desbloqueado"
+    );
+
+}
+
+
+/* FUEGUITO */
+
+function popFlame(e){
+
+    let f =
+    document.createElement("div");
+
+    f.className = "flame";
+
+    f.textContent = "🔥";
+
+    f.style.left =
+    (e.clientX ||
+    innerWidth / 2) +
+    "px";
+
+    f.style.top =
+    (e.clientY ||
+    innerHeight / 2) +
+    "px";
+
+    document
+    .body
+    .appendChild(f);
+
+    setTimeout(
+        () => f.remove(),
+        1000
+    );
+
+}
+
+
+/* LLUVIA DE FUEGO */
+
+function fireStorm(e){
+
+    for(
+        let i = 0;
+        i < 18;
+        i++
+    ){
+
+        setTimeout(
+            () => {
+
+                let f =
+                document.createElement("div");
+
+                f.className =
+                "flame";
+
+                let icons =
+                ["🔥","🌶️","💥"];
+
+                f.textContent =
+                icons[
+                    Math.floor(
+                        Math.random() *
+                        icons.length
+                    )
+                ];
+
+                f.style.left =
+                Math.random() *
+                innerWidth +
+                "px";
+
+                f.style.top =
+                (innerHeight - 40) +
+                "px";
+
+                document
+                .body
+                .appendChild(f);
+
+                setTimeout(
+                    () => f.remove(),
+                    1000
+                );
+
+            },
+
+            i * 55
+        );
+
+    }
+
+    toast(
+        "🔥 ¡ANDO BIEN FLAMIN!"
+    );
+
+}
+
+
+/* INICIAR MEDIDOR */
+
 spiceLevel(3);
-addEventListener("scroll",()=>{let h=document.documentElement;document.getElementById("progress").style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+"%"});
-let io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("on")}),{threshold:.12});document.querySelectorAll(".reveal").forEach(x=>io.observe(x));
+
+
+/* BARRA SUPERIOR */
+
+addEventListener(
+    "scroll",
+    () => {
+
+        let h =
+        document.documentElement;
+
+        let porcentaje =
+
+        h.scrollTop /
+        (
+            h.scrollHeight -
+            h.clientHeight
+        ) * 100;
+
+        document
+        .getElementById("progress")
+        .style.width =
+        porcentaje + "%";
+
+    }
+);
+
+
+/* ANIMACIONES AL BAJAR */
+
+let io =
+new IntersectionObserver(
+
+    entries =>
+    entries.forEach(
+
+        entry => {
+
+            if(
+                entry.isIntersecting
+            ){
+
+                entry
+                .target
+                .classList
+                .add("on");
+
+            }
+
+        }
+
+    ),
+
+    {
+        threshold:.12
+    }
+
+);
+
+
+document
+.querySelectorAll(".reveal")
+.forEach(
+
+    elemento =>
+    io.observe(elemento)
+
+);
+
 </script>
 
-</body></html>
+</body>
+</html>
